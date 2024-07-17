@@ -5,7 +5,10 @@ const schema = mongoose.Schema({
     },
     metaData:{
         type:Object
+    },
+    upid:{
+        type: String
     }
-});
+},{Timestamp:true});
 const model = mongoose.model('Deleted',schema);
 module.exports = model;

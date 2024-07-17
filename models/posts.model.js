@@ -1,10 +1,22 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema({
     post:{
-        type:Object
+        likes:{
+            type:Number,
+            default:0
+        },
+        content:{
+            type:String,
+        },
+        likedBy:{
+            type:Array
+        }
     },
     metaData:{
         type:Object
+    },
+    upid:{
+        type: String
     }
 },{
     timestamps: true

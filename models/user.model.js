@@ -3,7 +3,8 @@ const mongoose=require('mongoose');
 const schema = mongoose.Schema({
     email:{
         type:String,
-        unique:true
+        unique:true,
+        required:false
     },
     username:{
         type:String,

@@ -4,22 +4,22 @@ const db = require('../models/user.model');
 const signup= async (req, res) => {
     const { username, password, email } = req.body;
 
-    if (!username) {
-        return res.status(400).json({ message: "Username is required" });
+    if (!username && !email) {
+        return res.status(400).json({ message: "Username or Email is required" });
     }
     if (!password) {
         return res.status(400).json({ message: "Password is required" });
     }
-    if (!email) {
-        return res.status(400).json({ message: "Email is required" });
-    }
+    // if ) {
+    //     return res.status(400).json({ message: "Email is required" });
+    // }
 
     const uid = generate_UID();
 
     const data = {
         username: username,
         password: password,
-        email: email,
+        email: email?email:uid,
         uid: uid
     };
 

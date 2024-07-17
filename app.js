@@ -10,7 +10,10 @@ const makePost = require('./controllers/make_a_post.controller')
 const deletePost = require('./controllers/delete_a_Post.controller')
 const getFeed = require('./controllers/getFeed.controller')
 const getMyPosts = require('./controllers/myPosts.controller')
-const getTrashBin = require('./controllers/myTrashBin.controller')
+const getTrashBin = require('./controllers/myTrashBin.controller');
+const getUserData = require('./utils/getUsername');
+const likePost = require('./controllers/like_a_Post.controller');
+const unLike = require('./controllers/remove_like.controller');
 
 app.use(express.json());
 app.use(cors())
@@ -24,6 +27,9 @@ app.delete('/post',auth,deletePost);
 app.get('/feed',auth,getFeed);
 app.get('/myposts',auth,getMyPosts);
 app.get('/myTrash',auth,getTrashBin);
+app.post('/getData',auth,getUserData);
+app.put('/post',auth,likePost)
+app.delete('/like',auth,unLike)
 
 app.get("/", (req, res) => {
     console.log(req);

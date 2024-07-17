@@ -2,9 +2,11 @@ const posts_db = require('../models/posts.model')
 const generate_UID = require('../utils/uidGenerator')
 const makePost = async(req,res)=>{
     const {post, metaData} = req.body;
+    const upid=generate_UID();
     const data = {
         post: post,
-        metaData: metaData
+        metaData: metaData,
+        upid: upid
     }
     console.log(data)
 
