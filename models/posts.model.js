@@ -1,25 +1,41 @@
 const mongoose = require('mongoose');
-const schema = mongoose.Schema({
-    post:{
-        likes:{
-            type:Number,
-            default:0
-        },
-        content:{
-            type:String,
-        },
-        likedBy:{
-            type:Array
+
+const commentSchema = new mongoose.Schema({
+    comment_id: String,
+    text: String,
+    likedBy: [
+        {
+            username: String,
+            uid: String
         }
+    ],
+    comment_id: String,
+    date: Date
+});
+
+const postSchema = new mongoose.Schema({
+    post: {
+        likes: {
+            type: Number,
+            default: 0
+        },
+        content: {
+            type: String
+        },
+        likedBy: {
+            type: Array
+        },
+        comments: [commentSchema]
     },
-    metaData:{
-        type:Object
+    metaData: {
+        type: Object
     },
-    upid:{
+    upid: {
         type: String
     }
-},{
+}, {
     timestamps: true
 });
-const model = mongoose.model('Posts',schema);
-module.exports = model;
+
+const Posts = mongoose.model('Posts', postSchema);
+module.exports = Posts;
