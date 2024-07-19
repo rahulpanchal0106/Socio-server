@@ -45,7 +45,7 @@ const addComment = async (req, res) => {
             comment: comment,
             likedBy: [],
             comment_id: comment_id,
-            date: new Date().toDateString()
+            date: new Date().toISOString()
         });
         await doc.save();
         console.log("Saved the updated doc with comment");
