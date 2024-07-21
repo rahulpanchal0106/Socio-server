@@ -13,6 +13,13 @@ const schema = mongoose.Schema({
     password:{
         type:String
     },
+    bio:{
+        type:String
+    },
+    profilePicture:{
+        type:String
+    },
+
     uid:{
         type:String
     }

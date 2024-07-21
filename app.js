@@ -17,6 +17,7 @@ const unLike = require('./controllers/remove_like.controller');
 const addComment = require('./controllers/add_a_comment.controller');
 const likeComment = require('./controllers/likeComment.controller');
 const DeleteComment = require('./controllers/DeleteComment');
+const getPerson = require('./controllers/getPerson.controller');
 
 app.use(express.json());
 app.use(cors())
@@ -36,7 +37,7 @@ app.delete('/like',auth,unLike)
 app.put('/comment',auth,addComment);
 app.post('/comment',auth,likeComment);
 app.delete('/comment',auth,DeleteComment);
-
+app.post('/person',auth,getPerson)
 app.get("/", (req, res) => {
     console.log(req);
     res.send("Socio server is live!");
