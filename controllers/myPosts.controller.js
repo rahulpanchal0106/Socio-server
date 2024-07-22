@@ -1,12 +1,13 @@
 const getUserData = require('../utils/getUsername')
 const posts_db = require('../models/posts.model')
 const myPosts = async(req,res)=>{
-    var {username} = req.body;
-    if(!username){
+    // var {username} = req.body;
+    const {username} = req.body
+    // if(!username){
 
-        const userData = getUserData(req);
-        username=userData.username;
-    }
+    //     const userData = getUserData(req);
+    //     username=userData.username;
+    // }
     try{
         console.log(`-----Fetching posts made by ${username}----- `)
         const name = username;

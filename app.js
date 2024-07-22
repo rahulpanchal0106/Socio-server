@@ -18,6 +18,8 @@ const addComment = require('./controllers/add_a_comment.controller');
 const likeComment = require('./controllers/likeComment.controller');
 const DeleteComment = require('./controllers/DeleteComment');
 const getPerson = require('./controllers/getPerson.controller');
+const UpdateProfile = require('./controllers/UpdateProfile.controller');
+const deleteForever = require('./controllers/deletePermenently.controller');
 
 app.use(express.json());
 app.use(cors())
@@ -28,8 +30,9 @@ app.post('/login', login_controller);
 app.get('/people',auth, getAllPeople)
 app.post('/post',auth,makePost);
 app.delete('/post',auth,deletePost);
+app.delete('/deletepermenently',auth,deleteForever);
 app.get('/feed',auth,getFeed);
-app.get('/myposts',auth,getMyPosts);
+app.post('/myposts',auth,getMyPosts);
 app.get('/myTrash',auth,getTrashBin);
 app.post('/getData',auth,getUserData);
 app.put('/post',auth,likePost)
@@ -38,6 +41,7 @@ app.put('/comment',auth,addComment);
 app.post('/comment',auth,likeComment);
 app.delete('/comment',auth,DeleteComment);
 app.post('/person',auth,getPerson)
+app.put('/profile',auth,UpdateProfile)
 app.get("/", (req, res) => {
     console.log(req);
     res.send("Socio server is live!");
