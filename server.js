@@ -2,14 +2,20 @@ require('dotenv').config();
 const app =require('./app')
 const mongoose = require('mongoose');
 const start_server = async ()=>{
-    
-   await mongoose.connect(process.env.DB).catch((e)=>{
-        console.log("DB CONNECTION PROBLEM: ",e)
-    })
+    try{
+        await mongoose.connect(process.env.DB).catch((e)=>{
+            console.log("DB CONNECTION PROBLEM: ",e)
+        })
 
-    app.listen(process.env.PORT,()=>{
-        console.log("Socio Server is ON....");
-    })
+        app.listen(process.env.PORT,()=>{
+            console.log("Socio Server is ON....");
+        })
+        
+    }catch(e){
+        console.error("Couldent connect to db...",e)
+    }
+
+    
 }
 
 mongoose.connection.on('connected',()=>{

@@ -20,6 +20,7 @@ const DeleteComment = require('./controllers/DeleteComment');
 const getPerson = require('./controllers/getPerson.controller');
 const UpdateProfile = require('./controllers/UpdateProfile.controller');
 const deleteForever = require('./controllers/deletePermenently.controller');
+const AddFollower = require('./controllers/add_a_follower.controller');
 
 app.use(express.json());
 app.use(cors())
@@ -42,6 +43,9 @@ app.post('/comment',auth,likeComment);
 app.delete('/comment',auth,DeleteComment);
 app.post('/person',auth,getPerson)
 app.put('/profile',auth,UpdateProfile)
+app.put('/follower',auth,AddFollower)
+// app.put('/following',auth,addFollowing)
+
 app.get("/", (req, res) => {
     console.log(req);
     res.send("Socio server is live!");

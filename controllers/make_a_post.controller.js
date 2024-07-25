@@ -2,13 +2,17 @@ const posts_db = require('../models/posts.model')
 const generate_UID = require('../utils/uidGenerator')
 const makePost = async(req,res)=>{
     const {post, metaData} = req.body;
-    const upid=generate_UID();
-    const data = {
-        post: post,
-        metaData: metaData,
-        upid: upid
+    try{
+        const upid=generate_UID();
+        const data = {
+            post: post,
+            metaData: metaData,
+            upid: upid
+        }
+        console.log(data)
+    }catch(e){
+        console.log("Error in make_a_post: ",e);
     }
-    console.log(data)
 
     try{
         console.log("🟡 Making a post by ",metaData.author);
