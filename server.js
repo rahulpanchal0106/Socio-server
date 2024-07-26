@@ -10,6 +10,9 @@ const start_server = async ()=>{
         app.listen(process.env.PORT,()=>{
             console.log("Socio Server is ON....");
         })
+        mongoose.connection.on('connected',()=>{
+            console.log("database cluster connected....")
+        })
         
     }catch(e){
         console.error("Couldent connect to db...",e)
@@ -18,8 +21,8 @@ const start_server = async ()=>{
     
 }
 
-mongoose.connection.on('connected',()=>{
-    console.log("database cluster connected....")
-})
-
-start_server()
+try{
+    start_server()
+}catch(e){
+    console.error("Error starting server: ",e)
+}
