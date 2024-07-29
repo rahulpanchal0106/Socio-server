@@ -20,7 +20,7 @@ const auth=async(req,res,next)=>{
     
         
         const d=jwt.verify(token,'cat');
-        console.log(d);
+        // console.log(d);
     }catch(e){
         console.error("ERROR IN AUTH.JS: ",e)
     }

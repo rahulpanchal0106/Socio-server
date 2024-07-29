@@ -19,7 +19,7 @@ const addComment = async (req, res) => {
         if (!user) {
             return res.status(401).json({ message: "Unauthorized user" });
         }
-        console.log("*&*&&*&*&* ",user)
+        // console.log("*&*&&*&*&* ",user)
         let doc;
         // const objectId = new mongoose.Types.ObjectId(post_id);
         doc = await Posts.findById(id);

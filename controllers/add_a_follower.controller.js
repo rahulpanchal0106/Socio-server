@@ -1,7 +1,5 @@
-const Post = require('../models/posts.model');
-const getUserData = require('../utils/getUsername');
-const LikedPostsDB = require('../models/liked.model');
 const userModel = require('../models/user.model');
+const getUserData = require('../utils/getUsername');
 
 const AddFollower = async (req, res) => {
     const { uidTo } = req.body;
@@ -23,8 +21,6 @@ const AddFollower = async (req, res) => {
             return res.status(404).json({ message: "UserBy not found" });
         }
 
-        const unameTo = ToDoc.username;
-
         // Check if the user is already following
         const isAlreadyFollowing = ToDoc.followers.some(follower => follower.uid === ByDoc.uid);
 
@@ -41,11 +37,19 @@ const AddFollower = async (req, res) => {
             return res.status(200).json({ message: "Successfully unfollowed the user" });
         } else {
             // Add follower
-            ToDoc.followers.push(ByDoc);
+            const followerData = {
+                uid: ByDoc.uid,
+                username: ByDoc.username
+            };
+            ToDoc.followers.push(followerData);
             console.log(`${ToDoc.username} was followed by ${ByDoc.username}`);
             await ToDoc.save();
 
-            ByDoc.following.push(ToDoc);
+            const followingData = {
+                uid: ToDoc.uid,
+                username: ToDoc.username
+            };
+            ByDoc.following.push(followingData);
             console.log(`${ToDoc.username} was added to ${ByDoc.username}'s Following list`);
             await ByDoc.save();
 

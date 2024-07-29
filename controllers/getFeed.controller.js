@@ -4,7 +4,7 @@ const getUserData = require('../utils/getUsername');
 const getFeed = async (req,res)=>{
     // const auth = req.authorization;
     const userData = getUserData(req);
-    console.log("🌟🌟🌟 ",userData)
+    // console.log("🌟🌟🌟 ",userData)
     try{
         console.log("🟡 Fetching feed");
         const feed = await posts_db.find({});

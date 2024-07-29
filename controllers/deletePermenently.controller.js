@@ -5,7 +5,7 @@ const getUserData = require('../utils/getUsername')
 const deleteForever = async (req, res) => {
     const { id } = req.body;
     const userData = getUserData(req);
-    console.log("&&&&&&&&&&&&& ", id);
+    // console.log("&&&&&&&&&&&&& ", id);
 
     try {
         console.log("🟡 Finding the post");

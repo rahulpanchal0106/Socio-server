@@ -1,66 +1,55 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
-
-const schema = mongoose.Schema({
-    email:{
-        type:String,
-        unique:true,
-        required:false
+const schema = new mongoose.Schema({
+    email: {
+        type: String,
+        unique: true,
+        required: false
     },
-    username:{
-        type:String,
-        unique: true
+    username: {
+        type: String,
+        unique: true,
+        required: true
     },
-    password:{
-        type:String
+    password: {
+        type: String,
+        required: true
     },
-    bio:{
-        type:String
+    bio: {
+        type: String
     },
-    profilePicture:{
-        type:String
+    profilePicture: {
+        type: String
     },
-    followers:{
-        type:[
-            {
-                email:{
-                    type:String,
-                    unique:true,
-                    required:false
-                },
-                username:{
-                    type:String,
-                    unique: true
-                },
-                password:{
-                    type:String
-                },
-                bio:{
-                    type:String
-                },
-                profilePicture:{
-                    type:String
-                },
-                followers:{
-                    type:Array,
-                },
-                following:{
-                    type:Array
-                },
-            
-                uid:{
-                    type:String
-                }
+    followers: [
+        {
+            uid: {
+                type: String,
+                required: true
+            },
+            username: {
+                type: String,
+                required: true
             }
-        ],
-    },
-    following:{
-        type:Array
-    },
-
-    uid:{
-        type:String
+        }
+    ],
+    following: [
+        {
+            uid: {
+                type: String,
+                required: true
+            },
+            username: {
+                type: String,
+                required: true
+            }
+        }
+    ],
+    uid: {
+        type: String,
+        required: true,
+        unique: true
     }
-})
+});
 
-module.exports = mongoose.model('user',schema);
+module.exports = mongoose.model('User', schema);

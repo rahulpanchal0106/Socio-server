@@ -26,7 +26,7 @@ const signup= async (req, res) => {
                 uid: uid
             };
         
-            console.log(data);
+            // console.log(data);
             console.log(username, " signing up");
     }catch(e){
         console.log("ERROR IN SIGNUP: ",e)

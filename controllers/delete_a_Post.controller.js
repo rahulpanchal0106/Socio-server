@@ -5,7 +5,7 @@ const getUserData = require('../utils/getUsername')
 const deletePost = async (req, res) => {
     const { id } = req.body;
     const userData = getUserData(req);
-    console.log("&&&&&&&&&&&&& ", id);
+    // console.log("&&&&&&&&&&&&& ", id);
 
     try {
         console.log("🟡 Finding the post");
@@ -14,7 +14,7 @@ const deletePost = async (req, res) => {
             console.log("🔴 Post not found");
             return res.status(404).json({ message: "Post not found" });
         }
-        console.log(post,"   ",userData)
+        // console.log(post,"   ",userData)
         if(post.metaData.author!=userData.username){
             console.log("🔴 UnAuthorized to delete the post");
             return res.status(401).json({message:`The post is owned by ${post.metaData.author}, so you cannot delete it`})

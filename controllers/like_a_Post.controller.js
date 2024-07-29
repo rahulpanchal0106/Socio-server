@@ -47,7 +47,7 @@ const likePost = async (req, res) => {
 
         console.log("Saving the updated post...");
         const savedPost = await post.save();
-        console.log("Post saved: ", savedPost);
+        // console.log("Post saved: ", savedPost);
 
         return res.status(200).json({ message: "Post liked successfully", liked: true, post: savedPost });
 

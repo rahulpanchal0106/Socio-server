@@ -9,7 +9,7 @@ const makePost = async(req,res)=>{
             metaData: metaData,
             upid: upid
         }
-        console.log(data)
+        // console.log(data)
     }catch(e){
         console.log("Error in make_a_post: ",e);
     }
