@@ -3,7 +3,7 @@ const db = require('../models/user.model');
 
 const signup= async (req, res) => {
     const { username, password, email } = req.body;
-
+    var data;
     try{
 
         
@@ -19,7 +19,7 @@ const signup= async (req, res) => {
         
             const uid = generate_UID();
         
-            const data = {
+            data = {
                 username: username,
                 password: password,
                 email: email?email:uid,

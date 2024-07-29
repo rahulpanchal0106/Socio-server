@@ -1,7 +1,9 @@
 const db = require('../models/user.model');
+const getUserData = require('../utils/getUsername');
 
 const people=async (req,res)=>{
     try{
+        console.log("Fetching all the people for ",getUserData(req).username);
         const people = await db.find({});
         // console.log(people)
         res.status(200).send(people)

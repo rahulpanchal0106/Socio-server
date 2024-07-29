@@ -7,7 +7,7 @@ const getUserData=(req,res)=>{
         // console.log("🔥 userdata: ",userData)
         res.status(200).json({data: userData});
     }catch(e){
-        console.log("ERROR SENDING USERDATA RESP: ",e);
+        console.log("ERROR SENDING USERDATA RESP: ",e.message);
     }
     return userData;
 }

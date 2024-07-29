@@ -20,6 +20,10 @@ const AddFollower = async (req, res) => {
             console.log("UserBy not found");
             return res.status(404).json({ message: "UserBy not found" });
         }
+        if(ToDoc.uid==ByDoc.uid){
+            console.log(ToDoc.username," Tried to follow him/her self, lmao");
+            return res.status(400).json({ message: "You cannot follow yourself", error: "You cannot follow yourself" });
+        }
 
         // Check if the user is already following
         const isAlreadyFollowing = ToDoc.followers.some(follower => follower.uid === ByDoc.uid);

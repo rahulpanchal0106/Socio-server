@@ -6,21 +6,21 @@ const generate_UID = require('../utils/uidGenerator');
 
 const addComment = async (req, res) => {
     const { comment, post,id } = req.body;
+    var user,doc;
+    const comment_id = generate_UID();
     try {
         console.log("POST AND COMMENT", post, comment);
     
         if (!comment || !post) {
             return res.status(400).json({ message: "Post and comment are required" });
         }
-        const comment_id = generate_UID();
         
-        const user = getUserData(req);
+        user = getUserData(req);
     
         if (!user) {
             return res.status(401).json({ message: "Unauthorized user" });
         }
-        // console.log("*&*&&*&*&* ",user)
-        let doc;
+        console.log("*&*&&*&*&* ",user)
         // const objectId = new mongoose.Types.ObjectId(post_id);
         doc = await Posts.findById(id);
         if (!doc) {
