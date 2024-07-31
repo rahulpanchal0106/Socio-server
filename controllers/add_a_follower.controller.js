@@ -14,15 +14,15 @@ const AddFollower = async (req, res) => {
 
         if (!ToDoc) {
             console.log("UserTo not found");
-            return res.status(404).json({ message: "UserTo not found" });
+            return res.status(404).json({ message: "UserTo not found",status:400 });
         }
         if (!ByDoc) {
             console.log("UserBy not found");
-            return res.status(404).json({ message: "UserBy not found" });
+            return res.status(404).json({ message: "UserBy not found",status:400 });
         }
         if(ToDoc.uid==ByDoc.uid){
             console.log(ToDoc.username," Tried to follow him/her self, lmao");
-            return res.status(400).json({ message: "You cannot follow yourself", error: "You cannot follow yourself" });
+            return res.status(400).json({ message: "You cannot follow yourself", error: "You cannot follow yourself",status:400 });
         }
 
         // Check if the user is already following
@@ -38,7 +38,7 @@ const AddFollower = async (req, res) => {
             console.log(`${ToDoc.username} was removed from ${ByDoc.username}'s Following list`);
             await ByDoc.save();
 
-            return res.status(200).json({ message: "Successfully unfollowed the user" });
+            return res.status(200).json({ message: "Successfully unfollowed the user", status:200 });
         } else {
             // Add follower
             const followerData = {
@@ -57,11 +57,11 @@ const AddFollower = async (req, res) => {
             console.log(`${ToDoc.username} was added to ${ByDoc.username}'s Following list`);
             await ByDoc.save();
 
-            return res.status(200).json({ message: "Successfully followed the user" });
+            return res.status(200).json({ message: "Successfully followed the user",status:201 });
         }
     } catch (e) {
         console.log("Error Adding/Removing Follower: ", e);
-        return res.status(500).json({ message: "Failed to update followers", error: e.message });
+        return res.status(500).json({ message: "Failed to update followers", error: e.message, status:400 });
     }
 };
 
