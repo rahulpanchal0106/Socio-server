@@ -16,10 +16,10 @@ const UpdateProfile = async (req, res) => {
         }
 
         await user.save();
-        res.status(200).json({ message: "User data updated successfully" });
+        res.status(200).json({ message: "Profile updated successfully",status:200 });
     } catch (e) {
         console.error("Error finding or updating user:", e);
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({ message: "Failed to update profile",status:500 });
     }
 };
 

@@ -26,7 +26,7 @@ const login = async (req, res) => {
 
         if (!user) {
             console.log(`${username || email} not found!`);
-            return res.status(400).json({ message: `Invalid username or password` });
+            return res.status(400).json({ message: `"${username || email}" username not found` });
         }
 
         // Check password
@@ -38,9 +38,9 @@ const login = async (req, res) => {
         // Password is correct, generate JWT token
         console.log(`${username || email} logged in!`);
 
-        const token = jwt.sign({ uid: user.uid, username: user.username }, JWT_SECRET, { expiresIn: '24h' });
+        const token = jwt.sign({ uid: user.uid, username: user.username }, JWT_SECRET, { expiresIn: '100h' });
 
-        res.status(200).json({ message: `${username || email} login success`, token: token });
+        res.status(200).json({ message: `${username || email} logged in successfully`, token: token });
     } catch (error) {
         console.error("Login error:", error);
         res.status(500).json({ message: "Internal Server Error" });
