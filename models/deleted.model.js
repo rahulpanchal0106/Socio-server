@@ -8,6 +8,9 @@ const schema = mongoose.Schema({
     },
     upid:{
         type: String
+    },
+    category:{
+        type: String
     }
 },{Timestamp:true});
 const model = mongoose.model('Deleted',schema);

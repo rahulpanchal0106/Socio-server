@@ -5,6 +5,9 @@ const schema = mongoose.Schema({
     },
     userId:{
         type: String
+    },
+    category:{
+        type:String
     }
 
 },{Timestamp:true});

@@ -21,6 +21,7 @@ const getPerson = require('./controllers/getPerson.controller');
 const UpdateProfile = require('./controllers/UpdateProfile.controller');
 const deleteForever = require('./controllers/deletePermenently.controller');
 const AddFollower = require('./controllers/add_a_follower.controller');
+const googleCall = require('./utils/googleCall');
 
 app.use(express.json());
 app.use(cors())

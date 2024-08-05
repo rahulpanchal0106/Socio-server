@@ -2,6 +2,7 @@ const Post = require('../models/posts.model');
 const getUserData = require('../utils/getUsername');
 const LikedPostsDB = require('../models/liked.model');
 
+
 const likePost = async (req, res) => {
     const { id } = req.body;
     const userData = getUserData(req);
@@ -40,7 +41,10 @@ const likePost = async (req, res) => {
         console.log("Incrementing the like count...");
         post.post.likes += 1;
 
-        await LikedPostsDB.create({ postId: id, userId: userData.uid });
+        await LikedPostsDB.create({ 
+            postId: id, 
+            userId: userData.uid, 
+            category: post.category?post.category:"" });
         console.log("Post added to liked posts collection");
 
         post.post.likedBy.push({ username: userData.username, uid: userData.uid });

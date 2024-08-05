@@ -49,6 +49,9 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    category_pref:{
+        type: Array
     }
 });
 

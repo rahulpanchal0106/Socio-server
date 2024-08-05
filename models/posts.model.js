@@ -32,6 +32,9 @@ const postSchema = new mongoose.Schema({
     },
     upid: {
         type: String
+    },
+    category:{
+        type: String
     }
 }, {
     timestamps: true
