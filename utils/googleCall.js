@@ -20,10 +20,14 @@ const googleCall=async(prompt)=>{
     //     mimeType: "image/png",
     // },
     // };
-
-    const result = await model.generateContent(prompt);
-    console.log(result.response.text());
-    return {result: result.response.text()};
+    try{
+        const result = await model.generateContent(prompt);
+        console.log(result.response.text());
+        return {result: result.response.text()};
+    }catch(e){
+        console.log(e)
+        return {result: ""};
+    }
 
 }
 module.exports = googleCall;
