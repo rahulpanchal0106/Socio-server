@@ -383,7 +383,7 @@ const makePost = async(req,res)=>{
     try{
         console.log("🟡 Making a post by ",metaData.author);
         await posts_db.create(data);
-        console.log("🟢 Done Making a post by ",metaData.author);
+        console.log("🟢 Done Making a post by ",metaData.author, data);
         res.status(201).json({message: "Post Create Successfully"});
     }catch(e){
         console.log("🔴 Error creating Post: ",e);
