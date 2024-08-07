@@ -48,7 +48,6 @@ app.put('/follower',auth,AddFollower)
 // app.put('/following',auth,addFollowing)
 
 app.get("/", (req, res) => {
-    console.log(req);
     res.send("Socio server is live!");
 });
 
