@@ -11,5 +11,5 @@ const schema = mongoose.Schema({
     }
 
 },{Timestamp:true});
-const model = mongoose.model('Liked Posts',schema);
+const model = mongoose.model('Liked Posts-dev',schema);
 module.exports=model;

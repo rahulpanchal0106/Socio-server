@@ -13,5 +13,5 @@ const schema = mongoose.Schema({
         type: String
     }
 },{Timestamp:true});
-const model = mongoose.model('Deleted',schema);
+const model = mongoose.model('Deleted-dev',schema);
 module.exports = model;

@@ -55,4 +55,4 @@ const schema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('People', schema);
+module.exports = mongoose.model('People-dev', schema);
