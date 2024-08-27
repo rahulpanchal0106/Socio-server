@@ -48,7 +48,7 @@ app.delete('/comment',auth,DeleteComment);
 app.post('/person',auth,getPerson)
 app.put('/profile',auth,UpdateProfile)
 app.put('/follower',auth,AddFollower)
-app.post('/upload_pf',auth,upload.any(),add_pf)
+app.post('/upload_pf',upload.any(),add_pf)
 // app.put('/following',auth,addFollowing)
 
 app.get("/", (req, res) => {

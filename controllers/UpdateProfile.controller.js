@@ -1,4 +1,5 @@
 const userModel = require("../models/user.model");
+const searchPf = require("../utils/searchPf");
 
 const UpdateProfile = async (req, res) => {
     const { bio, username } = req.body;
@@ -13,6 +14,14 @@ const UpdateProfile = async (req, res) => {
             user.bio = bio;
         } else {
             console.log("No bio field provided to update");
+        }
+
+        const pf = await searchPf(username)
+        console.log("++++++++++++++++++>>>>",pf);
+        if(pf){
+            user.profilePicture = pf.id
+        }else {
+            console.log("No WebViewLink found");
         }
 
         await user.save();

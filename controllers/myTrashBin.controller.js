@@ -6,7 +6,7 @@ const trashBin=async(req,res)=>{
     try{
         console.log("🟡 fetching trashed posts");
         const data=await deleted_posts_db.find({"metaData.author":user.username});
-        console.log("🟢 fetched trashed posts\n",data);
+        console.log("🟢 fetched trashed posts for ",user.username);
 
         res.status(200).json(data);
     }catch(e){

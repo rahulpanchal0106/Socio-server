@@ -1,35 +1,43 @@
 
 const stream = require('stream')
 const path = require('path')
-const {google} = require('googleapis')
+const {google} = require('googleapis');
+const searchPf = require('./searchPf');
 
+const KEYFILEPATH = path.join(__dirname,"..", "cred.json");
+const SCOPES = ["https://www.googleapis.com/auth/drive"];
 
-const KEYS = path.join(__dirname,"keys.json")
-const SCOPES = ['https://googleapis.com/auth/drive']
-const auth = google.auth.GoogleAuth({
-    keyFile:KEYS,
-    scopes:SCOPES
-})
-const upload_file = async(file)=>{
+const auth = new google.auth.GoogleAuth({
+    keyFile: KEYFILEPATH,
+    scopes: SCOPES,
+});
+
+const drive = google.drive({ version: "v3", auth });
+
+const upload_file = async (fileObject,username) => {
+
+    const alreadyExists = await searchPf(username);
+    if(alreadyExists&&alreadyExists.id){
+        console.log("Profile picture ALREADY exists, ",alreadyExists);
+        await drive.files.delete({ fileId: alreadyExists.id });
+        console.log("Deleted Old one");
+    }
+    console.log("Updating with new one")
     const bufferStream = new stream.PassThrough();
-    bufferStream.end(file.buffer);
-    const {data} = await google.drive({
-        version:"v3",
-        auth
-    }).files.create({
-        media:{
-            mimeType:file.mimeType,
-            buffer:bufferStream
+    bufferStream.end(fileObject.buffer);
+    const { data } = await drive.files.create({
+        media: {
+            mimeType: fileObject.mimeType,
+            body: bufferStream,
         },
-        requestBody:{
-            name:file.originalname,
-            parents:["1C56obqW0lVzm4PdhZip4UR3xOLfo3GTW"]
+        requestBody: {
+            name: username,
+            parents: ["1C56obqW0lVzm4PdhZip4UR3xOLfo3GTW"],
         },
-        fields:"id,name"
-    })
-    console.log(file);
-    console.log("File uploaded: ",data.name, data.id);
-    
-}
+        fields: "id,name",
+    });
+    console.log(`Uploaded file ${data.name} ${data.id}`);
+    return data;
+};
 
 module.exports = upload_file

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const commentSchema = new mongoose.Schema({
     comment: String,
     commentBy:String,
+    profilePicC:String,
     likedBy: [
         {
             username: String,

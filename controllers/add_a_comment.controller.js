@@ -5,11 +5,11 @@ const users =  require('../models/user.model');
 const generate_UID = require('../utils/uidGenerator');
 
 const addComment = async (req, res) => {
-    const { comment, post,id } = req.body;
+    const { comment, post,id, profilePicC } = req.body;
     var user,doc;
     const comment_id = generate_UID();
     try {
-        console.log("POST AND COMMENT", post, comment);
+        console.log("POST AND COMMENT", post, comment, profilePicC);
     
         if (!comment || !post) {
             return res.status(400).json({ message: "Post and comment are required" });
@@ -42,6 +42,7 @@ const addComment = async (req, res) => {
     try {
         doc.post.comments.push({
             commentBy: user.username,
+            profilePicC:profilePicC,
             comment: comment,
             likedBy: [],
             comment_id: comment_id,
