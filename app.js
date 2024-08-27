@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const auth=require('./auth/auth');
+const multer = require('multer')
 
 const login_controller = require('./controllers/login.controller')
 const signup_controller = require('./controllers/signup.controller')
@@ -22,9 +23,11 @@ const UpdateProfile = require('./controllers/UpdateProfile.controller');
 const deleteForever = require('./controllers/deletePermenently.controller');
 const AddFollower = require('./controllers/add_a_follower.controller');
 const googleCall = require('./utils/googleCall');
+const add_pf = require('./controllers/add_pf.controller');
 
 app.use(express.json());
 app.use(cors())
+const upload = multer()
 
 app.post('/signup', signup_controller);
 app.post('/login', login_controller);
@@ -45,6 +48,7 @@ app.delete('/comment',auth,DeleteComment);
 app.post('/person',auth,getPerson)
 app.put('/profile',auth,UpdateProfile)
 app.put('/follower',auth,AddFollower)
+app.post('/upload_pf',auth,upload.any(),add_pf)
 // app.put('/following',auth,addFollowing)
 
 app.get("/", (req, res) => {
