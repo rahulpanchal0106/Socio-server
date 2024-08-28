@@ -2,7 +2,7 @@ const posts_db = require('../models/posts.model');
 const googleCall = require('../utils/googleCall');
 const generate_UID = require('../utils/uidGenerator')
 const makePost = async(req,res)=>{
-    const {post, metaData} = req.body;
+    const {post, metaData,upid, postImg} = req.body;
     const prompt = `
         From the given list of categories, I want you to identify the given post and return its category.
         if it doesn't match any return "Other",
@@ -360,20 +360,22 @@ const makePost = async(req,res)=>{
 
 
     post: ${post.content}
-    
-
     ` ;
+
     const cat = await googleCall(prompt);
     console.log("🐈🐈🐈🐈 ",cat)
+    
     var data;
+    
     try{
-        const upid=generate_UID();
+        
         
         data = {
             post: post,
             metaData: metaData,
             upid: upid,
-            category:cat.result
+            category:cat.result,
+            postImg:postImg
         }
         // console.log(data)
     }catch(e){

@@ -34,6 +34,9 @@ const postSchema = new mongoose.Schema({
     upid: {
         type: String
     },
+    postImg:{
+        type: String
+    },
     category:{
         type: String
     }

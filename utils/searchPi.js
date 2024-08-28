@@ -30,16 +30,16 @@ const setFilePermission = async (fileId) => {
 const searchPf = async (username) => {
   try {
     const response = await drive.files.list({
-      q: `name contains '${username}' and (mimeType='image/jpeg' or mimeType='image/png' or mimeType='image/svg+xml' or mimeType='image/gif')`,
+      q: `name contains '${username}'`,
       fields: 'files(id, name, webViewLink, webContentLink)',
       spaces: 'drive',
     });
 
     const files = response.data.files;
 
-    if (files.length === 0) {
-      throw new Error('No files found.');
-    }
+    // if (files.length === 0) {
+    //   throw new Error('No files found.');
+    // }
 
     const file = files[0];
     
@@ -49,7 +49,7 @@ const searchPf = async (username) => {
 
     return file;
   } catch (error) {
-    console.error('Error searching for file:', error.message, "++>> ",username);
+    console.error('Error searching for file:', error.message);
     return null;
   }
 };

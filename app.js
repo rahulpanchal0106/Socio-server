@@ -24,6 +24,7 @@ const deleteForever = require('./controllers/deletePermenently.controller');
 const AddFollower = require('./controllers/add_a_follower.controller');
 const googleCall = require('./utils/googleCall');
 const add_pf = require('./controllers/add_pf.controller');
+const add_pi = require('./controllers/add_pi.controller');
 
 app.use(express.json());
 app.use(cors())
@@ -49,6 +50,7 @@ app.post('/person',auth,getPerson)
 app.put('/profile',auth,UpdateProfile)
 app.put('/follower',auth,AddFollower)
 app.post('/upload_pf',upload.any(),add_pf)
+app.post('/upload_pi',upload.any(),add_pi)
 // app.put('/following',auth,addFollowing)
 
 app.get("/", (req, res) => {

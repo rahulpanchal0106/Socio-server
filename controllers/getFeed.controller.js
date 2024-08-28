@@ -2,6 +2,7 @@ const posts_db = require('../models/posts.model');
 const LikedPostsDB = require('../models/liked.model');
 const getUserData = require('../utils/getUsername');
 const userModel = require('../models/user.model');
+const searchPf = require('../utils/searchPf');
 
 const getFeed = async (req, res) => {
     // const auth = req.authorization;
@@ -20,11 +21,8 @@ const getFeed = async (req, res) => {
         console.log(likesArray)
         if(likesArray.length>0){
             feed = await posts_db.find({});
-            // feed = await posts_db.find({
-            //     category:{
-            //         $in:likesArray
-            //     }
-            // });
+            
+
             const map = likesArray.reduce((acc, category) => {
                 acc[category] = (acc[category] || 0) + 1;
                 return acc;
@@ -37,6 +35,23 @@ const getFeed = async (req, res) => {
                 const bCategory = b.category || 'Unknown';
                 return (map[aCategory] || 0) - (map[bCategory] || 0);
             });
+
+            for (const postObj of feed) {
+                if (postObj.postImg === 'none') {
+                    console.log("⚠️ No postImg in post with id: ", postObj._id);
+                    const driveData = await searchPf(postObj.upid);
+                    if (driveData) {
+                        // Update only the postImg in the database to avoid altering other fields
+                        await posts_db.updateOne(
+                            { _id: postObj._id },
+                            { $set: { postImg: driveData.id } }
+                        );
+                        console.log("🔄 Updated postImg for post with id: ", postObj._id);
+                    }
+                } else {
+                    console.log("🚀 postImg already exists in post with id: ", postObj._id);
+                }
+            }
     
             const values = Object.values(map);
             const maxValue = Math.max(...values);
