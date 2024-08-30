@@ -8,7 +8,7 @@ const getFeed = async (req, res) => {
     const userData = getUserData(req);
     const offset = parseInt(req.query.offset) || 0;
     const limit = parseInt(req.query.limit) || 5;
-    var categoryMap;
+    var categoryMap=[];
 
     try {
         const userDoc = await userModel.findOne({ username: userData.username });
@@ -44,10 +44,12 @@ const getFeed = async (req, res) => {
                 .sort({ createdAt: -1 })
                 .skip(offset)
                 .limit(limit)
-                .lean();
+                // .lean();
         }
         const uniqueAuthors = [...new Set(feed.map(post => post.metaData.author))];
         const authorDataMap = {};
+
+        console.log("🔥🔥🔥🔥 ",feed.length)
 
         await Promise.all(uniqueAuthors.map(async (author) => {
             const authorData = await searchPerson(author);
@@ -97,7 +99,7 @@ const getFeed = async (req, res) => {
 
     } catch (e) {
         console.log("Error fetching feed: ", e);
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({paginatedFeed:[],total});
     }
 };
 
