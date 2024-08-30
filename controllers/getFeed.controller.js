@@ -19,13 +19,12 @@ const getFeed = async (req, res) => {
         
         let feed = [];
         if (likesArray.length > 0) {
-            // Category preferences map
             categoryMap = likesArray.reduce((acc, category) => {
                 acc[category] = (acc[category] || 0) + 1;
                 return acc;
             }, {});
 
-            // Fetch sorted feed based on user's liked categories
+            
             feed = await posts_db.aggregate([
                 {
                     $addFields: {
@@ -39,7 +38,7 @@ const getFeed = async (req, res) => {
 
             console.log(`😶‍🌫️ Making the feed from index ${offset} - ${offset + limit}, Remaining posts ${feed.length}`);
         } else {
-            // Default fetch if no preferences are set
+
             feed = await posts_db
                 .find({})
                 .sort({ createdAt: -1 })
@@ -47,8 +46,6 @@ const getFeed = async (req, res) => {
                 .limit(limit)
                 .lean();
         }
-
-        // Fetch all authors' data in one go to reduce DB queries
         const uniqueAuthors = [...new Set(feed.map(post => post.metaData.author))];
         const authorDataMap = {};
 
@@ -58,8 +55,6 @@ const getFeed = async (req, res) => {
                 authorDataMap[author] = authorData.profilePicture;
             }
         }));
-
-        // Update posts with author profile pictures and post images
         await Promise.all(feed.map(async (postObj) => {
             if (postObj.postImg === 'none') {
                 const driveData = await searchPf(postObj.upid);
@@ -85,7 +80,6 @@ const getFeed = async (req, res) => {
             }
         }));
 
-        // Update user's category preference if needed
         const values = Object.values(categoryMap);
         const maxValue = Math.max(...values);
         const maxKey = Object.keys(categoryMap).find(key => categoryMap[key] === maxValue);
