@@ -4,7 +4,7 @@ const getUserData=(req,res)=>{
     const token = auth.split(' ')[1];
     const userData = jwt.decode(token,'cat');
     try{
-        console.log("🔥 userdata: ",userData)
+        // console.log("🔥 userdata: ",userData)
         res.status(200).json({data: userData});
     }catch(e){
         console.log("ERROR SENDING USERDATA RESP: ",e.message);
