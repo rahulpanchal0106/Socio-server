@@ -99,7 +99,7 @@ const getFeed = async (req, res) => {
 
     } catch (e) {
         console.log("Error fetching feed: ", e);
-        res.status(500).json({paginatedFeed:[],total});
+        res.status(500).json({paginatedFeed:[],total:0});
     }
 };
 
