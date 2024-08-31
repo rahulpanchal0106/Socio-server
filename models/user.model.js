@@ -30,6 +30,9 @@ const schema = new mongoose.Schema({
             username: {
                 type: String,
                 required: true
+            },
+            profilePicture:{
+                type: String
             }
         }
     ],
@@ -42,6 +45,9 @@ const schema = new mongoose.Schema({
             username: {
                 type: String,
                 required: true
+            },
+            profilePicture:{
+                type: String
             }
         }
     ],

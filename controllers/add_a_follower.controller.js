@@ -43,7 +43,8 @@ const AddFollower = async (req, res) => {
             // Add follower
             const followerData = {
                 uid: ByDoc.uid,
-                username: ByDoc.username
+                username: ByDoc.username,
+                profilePicture: ByDoc.profilePicture,
             };
             ToDoc.followers.push(followerData);
             console.log(`${ToDoc.username} was followed by ${ByDoc.username}`);
@@ -51,7 +52,8 @@ const AddFollower = async (req, res) => {
 
             const followingData = {
                 uid: ToDoc.uid,
-                username: ToDoc.username
+                username: ToDoc.username,
+                profilePicture: ToDoc.profilePicture
             };
             ByDoc.following.push(followingData);
             console.log(`${ToDoc.username} was added to ${ByDoc.username}'s Following list`);
