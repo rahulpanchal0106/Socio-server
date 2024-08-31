@@ -8,13 +8,15 @@ const people = async (req, res) => {
         console.log("Fetching all the people for ", userData);
         const userDoc = await usersModel.findOne({ username: userData.username });
         
-        if (!userDoc || !userDoc.category_pref || userDoc.category_pref.length === 0) {
-            console.log("💀💀💀💀💀💀💀💀")
-            return res.status(400).send("User category preference not found");
-        }
-
+        
         const userPref = userDoc.category_pref[0];
         const people = await db.find({});
+        
+        if (!userDoc || !userDoc.category_pref || userDoc.category_pref.length === 0) {
+            console.log("💀💀💀💀💀💀💀💀")
+            return res.status(200).send(people);
+            
+        }
         
         people.sort((a, b) => {
             const aLove = a.category_pref ? a.category_pref[0] : '';
