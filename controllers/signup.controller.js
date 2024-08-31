@@ -37,8 +37,8 @@ const signup= async (req, res) => {
         console.log(username, " signed up!");
         res.status(201).json({ message: `${username} Sign up success` });
     } catch (e) {
-        console.log("Signup err: ", e);
-        res.status(500).json({ message: "Internal server error" });
+        console.log("Signup err: ", e, e.code);
+        res.status(500).json({ message: e.code || "Internal server error" });
     }
 }
 module.exports=signup;
