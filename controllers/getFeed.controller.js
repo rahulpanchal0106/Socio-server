@@ -7,7 +7,7 @@ const searchPerson = require('../utils/searchPerson');
 const getFeed = async (req, res) => {
     const userData = getUserData(req);
     const offset = parseInt(req.query.offset) || 0;
-    const limit = parseInt(req.query.limit) || 5;
+    const limit = parseInt(req.query.limit) || 25;
     var categoryMap=[];
 
     try {
@@ -30,8 +30,8 @@ const getFeed = async (req, res) => {
                     $addFields: {
                         categoryScore: { $cond: { if: { $in: ["$category", Object.keys(categoryMap)] }, then: 1, else: 0 } }
                     }
-                },
-                { $sort: { categoryScore: -1, createdAt: -1 } },
+                },  
+                { $sort: { categoryScore: -1, createdAt: -1 } }, //It cn only sort to 32 Keys
                 { $skip: offset },
                 { $limit: limit }
             ]);
